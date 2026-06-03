@@ -1,55 +1,35 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Clock } from './components/Clock';
 import { useCurrentTime } from './hooks/useCurrentTime';
+import ClockSvg from "./img/Clock.svg";
+import FullscreenSvg from "./img/Fullscreen.svg";
+import ProjectorSvg from "./img/Projector.svg";
+import FullscreenExitSvg from "./img/FullscreenExit.svg";
+import SettingsHelperSvg from "./img/SettingsHelper.svg";
 
 // Icons
 const MonitorIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-    <line x1="8" y1="21" x2="16" y2="21" />
-    <line x1="12" y1="17" x2="12" y2="21" />
-  </svg>
+  <img src={ProjectorSvg} alt="Monitor" width={24} height={24} />
 );
 
 const StopIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-    <path d="M9 9l6 6" />
-    <path d="M15 9l-6 6" />
-  </svg>
+  <img src={FullscreenExitSvg} alt="Stop" width={24} height={24} />
 );
 
 const ClockIcon = ({ showSeconds }: { showSeconds: boolean }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" />
-    <polyline points="12 6 12 12 16 14" />
-    {showSeconds && <line x1="12" y1="12" x2="12" y2="8" />}
-  </svg>
+  <img src={ClockSvg} alt="Clock" width={24} height={24} />
 );
 
 const SettingsIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="3"></circle>
-    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-  </svg>
+  <img src={SettingsHelperSvg} alt="Settings" width={24} height={24} />
 );
 
 const MaximizeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M8 3H5a2 2 0 0 0-2 2v3" />
-    <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
-    <path d="M3 16v3a2 2 0 0 0 2 2h3" />
-    <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
-  </svg>
+  <img src={FullscreenSvg} alt="Maximize" width={24} height={24} />
 );
 
 const MinimizeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M8 3v3a2 2 0 0 1-2 2H3" />
-    <path d="M21 8h-3a2 2 0 0 1-2-2V3" />
-    <path d="M3 16h3a2 2 0 0 1 2 2v3" />
-    <path d="M16 21h3a2 2 0 0 1 2 2v-3" />
-  </svg>
+  <img src={FullscreenExitSvg} alt="Minimize" width={24} height={24} />
 );
 
 // Type definitions for the Window Management API
@@ -209,7 +189,7 @@ function App(): React.ReactNode {
 
       const { left, top, width, height } = secondaryScreen;
       const features = `left=${left},top=${top},width=${width},height=${height},popup=yes,noopener,noreferrer`;
-      
+
       const newWindow = window.open('/?mode=projector', 'projector-clock', features);
       setProjectorWindow(newWindow);
     } catch (err) {
@@ -243,9 +223,9 @@ function App(): React.ReactNode {
   if (isProjectorView) {
     return (
       <main className="min-h-screen bg-black text-gray-100 flex flex-col items-center justify-center font-sans antialiased cursor-none">
-        <Clock 
-          time={currentTime} 
-          showSeconds={showSeconds} 
+        <Clock
+          time={currentTime}
+          showSeconds={showSeconds}
           timeScale={timeScale}
           dateScale={dateScale}
           onTimeScaleChange={updateTimeScale}
@@ -305,12 +285,12 @@ function App(): React.ReactNode {
                 <span>Розмір часу</span>
                 <span>{Math.round(timeScale * 100)}%</span>
               </label>
-              <input 
+              <input
                 id="timeScale"
-                type="range" 
-                min="0" 
-                max="1" 
-                step="0.05" 
+                type="range"
+                min="0"
+                max="1"
+                step="0.05"
                 value={timeScale}
                 onChange={handleTimeScaleInput}
                 className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-gray-200"
@@ -322,19 +302,19 @@ function App(): React.ReactNode {
                 <span>Розмір дати</span>
                 <span>{Math.round(dateScale * 100)}%</span>
               </label>
-              <input 
+              <input
                 id="dateScale"
-                type="range" 
-                min="0" 
-                max="1" 
-                step="0.05" 
+                type="range"
+                min="0"
+                max="1"
+                step="0.05"
                 value={dateScale}
                 onChange={handleDateScaleInput}
                 className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-gray-200"
               />
             </div>
-            
-            <button 
+
+            <button
               onClick={() => {
                 updateTimeScale(1);
                 updateDateScale(1);
@@ -347,15 +327,15 @@ function App(): React.ReactNode {
         )}
       </div>
 
-      <Clock 
-        time={currentTime} 
-        showSeconds={showSeconds} 
+      <Clock
+        time={currentTime}
+        showSeconds={showSeconds}
         timeScale={timeScale}
         dateScale={dateScale}
         onTimeScaleChange={updateTimeScale}
         onDateScaleChange={updateDateScale}
       />
-      
+
       {/* Footer / Fullscreen Toggle */}
       <button
         onClick={toggleFullscreen}
