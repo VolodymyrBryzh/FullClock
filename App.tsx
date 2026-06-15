@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCurrentTime } from './hooks/useCurrentTime.ts';
 import { Clock } from './components/Clock.tsx';
-import { MaximizeIcon, MinimizeIcon } from './components/Icons.tsx';
+import { MaximizeIcon, MinimizeIcon, GithubIcon } from './components/Icons.tsx';
 
 function App(): React.ReactNode {
   const currentTime = useCurrentTime();
@@ -30,6 +30,17 @@ function App(): React.ReactNode {
   return (
     <main className="min-h-screen bg-black text-gray-100 flex flex-col items-center justify-center font-sans antialiased relative">
       <Clock time={currentTime} />
+
+      {/* Кнопка-посилання на GitHub */}
+      <a
+        href="https://github.com/VolodymyrBryzh/FullClock"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute bottom-5 left-5 z-10 p-3 bg-black text-gray-400 font-semibold rounded-full border border-gray-800 hover:bg-gray-950 hover:text-gray-100 hover:border-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-opacity-75 transition-all"
+        title="Відкрити GitHub репозиторій"
+      >
+        <GithubIcon />
+      </a>
 
       {/* Кнопка повноекранного режиму */}
       <button
