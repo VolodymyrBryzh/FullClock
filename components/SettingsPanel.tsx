@@ -27,7 +27,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
   }, [onTimeScaleChange, onDateScaleChange]);
 
   return (
-    <div className="bg-gray-900/90 border border-gray-700 p-4 rounded-xl flex flex-col gap-4 w-64 backdrop-blur-sm shadow-xl animate-in fade-in slide-in-from-top-2 duration-200">
+    <div className="bg-gray-900/90 border border-gray-700 p-4 rounded-xl flex flex-col gap-4 w-64 backdrop-blur-sm shadow-xl animate-settings-enter">
       <div className="flex flex-col gap-1">
         <label htmlFor="timeScale" className="text-xs text-gray-400 font-medium flex justify-between">
           <span>Розмір часу</span>

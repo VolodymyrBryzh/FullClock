@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState, useRef, useCallback } from 'react';
+import React, { memo, useRef, useCallback } from 'react';
 
 interface ClockProps {
   time: Date;
@@ -71,14 +71,6 @@ export const Clock: React.FC<ClockProps> = memo(({
   onTimeScaleChange,
   onDateScaleChange
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    // Trigger the fade-in effect shortly after mount
-    const timer = setTimeout(() => setIsVisible(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
   // Pinch handlers for Time
   const { 
     handleTouchStart: onTimeTouchStart, 
@@ -124,10 +116,7 @@ export const Clock: React.FC<ClockProps> = memo(({
     <div className="flex flex-col items-center justify-center select-none cursor-default text-center w-full overflow-hidden">
       {/* 
         Time Container Animation:
-        - transition duration-1000 ease-out: Standard properties (opacity, transform) animate smoothly for entrance.
-          Font-size updates instantly for responsive slider behavior.
-        - scale-90 -> scale-100: Ефект наближення
-        - opacity-0 -> opacity-100: Поява
+        - animate-clock-enter: Анімація появи та наближення
       */}
       <div 
         style={timeStyle}
@@ -135,17 +124,13 @@ export const Clock: React.FC<ClockProps> = memo(({
         onTouchMove={onTimeTouchMove}
         onTouchEnd={onTimeTouchEnd}
         onTouchCancel={onTimeTouchEnd}
-        className={`
-          flex justify-center items-baseline font-mono tabular-nums font-bold text-gray-100 tracking-wider leading-none w-full
-          transform transition duration-1000 ease-out
-          ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}
-        `}
+        className="flex justify-center items-baseline font-mono tabular-nums font-bold text-gray-100 tracking-wider leading-none w-full transform animate-clock-enter"
       >
         <span>{hoursAndMinutes}</span>
         
         {/* Контейнер для секунд з анімацією ширини та прозорості */}
         <span 
-          className={`overflow-hidden transition-all duration-500 ease-in-out flex justify-start ${
+          className={`overflow-hidden whitespace-nowrap transition-[max-width,opacity,transform] duration-500 ease-in-out flex justify-start ${
             showSeconds 
               ? 'max-w-[4ch] opacity-100 translate-x-0' 
               : 'max-w-0 opacity-0 -translate-x-4'
@@ -158,8 +143,7 @@ export const Clock: React.FC<ClockProps> = memo(({
 
       {/* 
         Date Container Animation:
-        - delay-300: Дата з'являється трохи пізніше за час
-        - translate-y-8 -> translate-y-0: Ефект спливання знизу
+        - animate-date-enter: Анімація плавного підняття дати
       */}
       <div 
         style={dateStyle}
@@ -167,11 +151,7 @@ export const Clock: React.FC<ClockProps> = memo(({
         onTouchMove={onDateTouchMove}
         onTouchEnd={onDateTouchEnd}
         onTouchCancel={onDateTouchEnd}
-        className={`
-          font-sans text-gray-400 uppercase tracking-widest mt-4
-          transform transition duration-1000 delay-300 ease-out
-          ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
-        `}
+        className="font-sans text-gray-400 uppercase tracking-widest mt-4 transform animate-date-enter"
       >
         {formattedDate}
       </div>
