@@ -23,3 +23,8 @@ html, body, #root {
 .animate-clock-enter {
   animation: clockEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+.transition-font-size {
+  transition: font-size 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
