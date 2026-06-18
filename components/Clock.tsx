@@ -17,6 +17,7 @@ export const Clock: React.FC<ClockProps> = memo(({ time, is12Hour }) => {
   return (
     <div className="flex flex-col items-center justify-center select-none cursor-default text-center w-full overflow-hidden">
       <div 
+        key={is12Hour ? '12h' : '24h'}
         style={{ fontSize }}
         className="flex justify-center items-baseline font-mono tabular-nums font-bold text-gray-100 tracking-wider leading-none w-full transform animate-clock-enter whitespace-nowrap"
       >
