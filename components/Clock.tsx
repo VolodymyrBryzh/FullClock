@@ -2,13 +2,14 @@ import React, { memo } from 'react';
 
 interface ClockProps {
   time: Date;
+  is12Hour: boolean;
 }
 
-export const Clock: React.FC<ClockProps> = memo(({ time }) => {
+export const Clock: React.FC<ClockProps> = memo(({ time, is12Hour }) => {
   const hoursAndMinutes = time.toLocaleTimeString('uk-UA', {
     hour: '2-digit',
     minute: '2-digit',
-    hour12: false
+    hour12: is12Hour
   });
 
   return (
