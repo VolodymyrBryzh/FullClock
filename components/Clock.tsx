@@ -18,23 +18,19 @@ export const Clock: React.FC<ClockProps> = memo(({ time, is12Hour, showSeconds }
   const formattedHours = hours.toString().padStart(2, '0');
   const formattedMinutes = time.getMinutes().toString().padStart(2, '0');
   const seconds = time.getSeconds().toString().padStart(2, '0');
-  
   const timeOnly = `${formattedHours}:${formattedMinutes}`;
 
-  // Обчислюємо розмір шрифту на основі вибраних елементів
+  // Розрахунок розміру шрифту на основі кількості елементів
   let fontSize = '26vw';
-  if (is12Hour && showSeconds) {
+  if (showSeconds && is12Hour) {
     fontSize = '12.5vw';
-  } else if (is12Hour || showSeconds) {
+  } else if (showSeconds || is12Hour) {
     fontSize = '17vw';
   }
 
-  // Визначаємо затримку анімації:
-  // Якщо є додаткові елементи (12г або секунди), годинник має зменшитись одразу,
-  // а нові елементи виїхати з затримкою.
-  // Якщо годинник пустий, елементи зникають одразу, а годинник збільшується з затримкою.
-  const isShrinking = is12Hour || showSeconds;
-  const sizeClass = isShrinking ? 'to-12h' : 'to-24h';
+  const isSmall = is12Hour || showSeconds;
+  const sizeClass = isSmall ? 'to-small-size' : 'to-large-size';
+  
   const suffixClass = is12Hour ? 'show' : 'hide';
   const secondsClass = showSeconds ? 'show' : 'hide';
 

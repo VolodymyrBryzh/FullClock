@@ -28,12 +28,12 @@ html, body, #root {
 .transition-clock-size {
   transition: font-size 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.transition-clock-size.to-24h {
-  /* Switch to 24h: delay scaling up until AM/PM is hidden */
+.transition-clock-size.to-large-size {
+  /* Delay scaling up until AM/PM and seconds are hidden */
   transition-delay: 0.3s;
 }
-.transition-clock-size.to-12h {
-  /* Switch to 12h: scale down immediately */
+.transition-clock-size.to-small-size {
+  /* Scale down immediately */
   transition-delay: 0s;
 }
 
@@ -56,7 +56,7 @@ html, body, #root {
   max-width: 3ch;
   opacity: 0.8;
   transform: translateX(0);
-  /* Switch to 12h: delay slide-out until clock scales down */
+  /* Delay slide-out until clock scales down */
   transition-delay: 0.3s;
 }
 
@@ -64,11 +64,11 @@ html, body, #root {
   max-width: 0;
   opacity: 0;
   transform: translateX(-0.5em);
-  /* Switch to 24h: hide immediately */
+  /* Hide immediately */
   transition-delay: 0s;
 }
 
-/* Seconds transition with sequenced delays */
+/* Seconds container transition with sequenced delays */
 .seconds-container {
   display: inline-block;
   overflow: hidden;
@@ -85,7 +85,7 @@ html, body, #root {
   max-width: 4ch;
   opacity: 0.8;
   transform: translateX(0);
-  /* Switch to show: delay slide-out until clock scales down */
+  /* Delay slide-out until clock scales down */
   transition-delay: 0.3s;
 }
 
@@ -93,7 +93,7 @@ html, body, #root {
   max-width: 0;
   opacity: 0;
   transform: translateX(-0.5em);
-  /* Switch to hide: hide immediately */
+  /* Hide immediately */
   transition-delay: 0s;
 }
 
