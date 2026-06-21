@@ -38,7 +38,7 @@ export const Clock: React.FC<ClockProps> = memo(({ time, is12Hour, showSeconds }
   // Якщо макет збільшується (currentVw > prevVw), затримуємо зміну розміру годинника,
   // щоб спочатку встигли сховатися елементи, які вимикаються.
   const sizeDelay = currentVw > prevVw ? '0.3s' : '0s';
-  const showDelay = '0.3s';
+  const showDelay = '0.4s';
   const hideDelay = '0s';
 
   const fontSize = `${currentVw}vw`;
@@ -51,7 +51,7 @@ export const Clock: React.FC<ClockProps> = memo(({ time, is12Hour, showSeconds }
     '--opacity-delay': showDelay,
     '--transform-delay': showDelay,
   } : {
-    '--width-delay': showDelay, // затримка згортання ширини, щоб воно йшло синхронно з розширенням годинника
+    '--width-delay': hideDelay,
     '--opacity-delay': hideDelay,
     '--transform-delay': hideDelay,
   }) as React.CSSProperties;
@@ -61,7 +61,7 @@ export const Clock: React.FC<ClockProps> = memo(({ time, is12Hour, showSeconds }
     '--opacity-delay': showDelay,
     '--transform-delay': showDelay,
   } : {
-    '--width-delay': showDelay, // затримка згортання ширини, щоб воно йшло синхронно з розширенням годинника
+    '--width-delay': hideDelay,
     '--opacity-delay': hideDelay,
     '--transform-delay': hideDelay,
   }) as React.CSSProperties;
