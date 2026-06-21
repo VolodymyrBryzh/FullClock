@@ -26,10 +26,10 @@ html, body, #root {
 
 /* Clock size transition with sequenced delays */
 .transition-clock-size {
-  transition: font-size 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: font-size 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Suffix transition with sequenced delays */
+/* Suffix transition with CSS variables for delays */
 .ampm-suffix {
   display: inline-block;
   overflow: hidden;
@@ -39,9 +39,9 @@ html, body, #root {
   opacity: 0;
   max-width: 0;
   transform: translateX(-0.5em);
-  transition: max-width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.3s ease-in-out,
-              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: max-width var(--width-duration, 0.4s) cubic-bezier(0.25, 1, 0.5, 1) var(--width-delay, 0s),
+              opacity var(--opacity-duration, 0.3s) ease-in-out var(--opacity-delay, 0s),
+              transform var(--transform-duration, 0.4s) cubic-bezier(0.25, 1, 0.5, 1) var(--transform-delay, 0s);
 }
 
 .ampm-suffix.show {
@@ -56,7 +56,7 @@ html, body, #root {
   transform: translateX(-0.5em);
 }
 
-/* Seconds container transition with sequenced delays */
+/* Seconds container transition with CSS variables for delays */
 .seconds-container {
   display: inline-block;
   overflow: hidden;
@@ -64,9 +64,9 @@ html, body, #root {
   opacity: 0;
   max-width: 0;
   transform: translateX(-0.5em);
-  transition: max-width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.3s ease-in-out,
-              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: max-width var(--width-duration, 0.4s) cubic-bezier(0.25, 1, 0.5, 1) var(--width-delay, 0s),
+              opacity var(--opacity-duration, 0.3s) ease-in-out var(--opacity-delay, 0s),
+              transform var(--transform-duration, 0.4s) cubic-bezier(0.25, 1, 0.5, 1) var(--transform-delay, 0s);
 }
 
 .seconds-container.show {
@@ -80,6 +80,7 @@ html, body, #root {
   opacity: 0;
   transform: translateX(-0.5em);
 }
+
 
 
 

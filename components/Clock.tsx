@@ -45,6 +45,27 @@ export const Clock: React.FC<ClockProps> = memo(({ time, is12Hour, showSeconds }
   const suffixClass = is12Hour ? 'show' : 'hide';
   const secondsClass = showSeconds ? 'show' : 'hide';
 
+  // CSS змінні для точного керування порядком анімації ширини та прозорості
+  const suffixStyles = (is12Hour ? {
+    '--width-delay': showDelay,
+    '--opacity-delay': showDelay,
+    '--transform-delay': showDelay,
+  } : {
+    '--width-delay': showDelay, // затримка згортання ширини, щоб воно йшло синхронно з розширенням годинника
+    '--opacity-delay': hideDelay,
+    '--transform-delay': hideDelay,
+  }) as React.CSSProperties;
+
+  const secondsStyles = (showSeconds ? {
+    '--width-delay': showDelay,
+    '--opacity-delay': showDelay,
+    '--transform-delay': showDelay,
+  } : {
+    '--width-delay': showDelay, // затримка згортання ширини, щоб воно йшло синхронно з розширенням годинника
+    '--opacity-delay': hideDelay,
+    '--transform-delay': hideDelay,
+  }) as React.CSSProperties;
+
   return (
     <div className="flex flex-col items-center justify-center select-none cursor-default text-center w-full overflow-hidden">
       <div 
@@ -53,13 +74,13 @@ export const Clock: React.FC<ClockProps> = memo(({ time, is12Hour, showSeconds }
       >
         <span>{timeOnly}</span>
         <span 
-          style={{ transitionDelay: showSeconds ? showDelay : hideDelay }}
+          style={secondsStyles}
           className={`seconds-container ${secondsClass}`}
         >
           :{seconds}
         </span>
         <span 
-          style={{ transitionDelay: is12Hour ? showDelay : hideDelay }}
+          style={suffixStyles}
           className={`ampm-suffix ${suffixClass}`}
         >
           {amPmSuffix}
