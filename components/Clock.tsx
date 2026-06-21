@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useRef, useEffect } from 'react';
 
 interface ClockProps {
   time: Date;
@@ -20,31 +20,48 @@ export const Clock: React.FC<ClockProps> = memo(({ time, is12Hour, showSeconds }
   const seconds = time.getSeconds().toString().padStart(2, '0');
   const timeOnly = `${formattedHours}:${formattedMinutes}`;
 
-  // Розрахунок розміру шрифту на основі кількості елементів
-  let fontSize = '26vw';
-  if (showSeconds && is12Hour) {
-    fontSize = '12.5vw';
-  } else if (showSeconds || is12Hour) {
-    fontSize = '17vw';
-  }
+  // Обчислення розміру макету для відстеження напрямку зміни
+  const getVwSize = (is12: boolean, showSecs: boolean) => {
+    if (showSecs && is12) return 12.5;
+    if (showSecs || is12) return 17;
+    return 26;
+  };
 
-  const isSmall = is12Hour || showSeconds;
-  const sizeClass = isSmall ? 'to-small-size' : 'to-large-size';
-  
+  const currentVw = getVwSize(is12Hour, showSeconds);
+  const prevVwRef = useRef(currentVw);
+  const prevVw = prevVwRef.current;
+
+  useEffect(() => {
+    prevVwRef.current = currentVw;
+  }, [currentVw]);
+
+  // Якщо макет збільшується (currentVw > prevVw), затримуємо зміну розміру годинника,
+  // щоб спочатку встигли сховатися елементи, які вимикаються.
+  const sizeDelay = currentVw > prevVw ? '0.3s' : '0s';
+  const showDelay = '0.3s';
+  const hideDelay = '0s';
+
+  const fontSize = `${currentVw}vw`;
   const suffixClass = is12Hour ? 'show' : 'hide';
   const secondsClass = showSeconds ? 'show' : 'hide';
 
   return (
     <div className="flex flex-col items-center justify-center select-none cursor-default text-center w-full overflow-hidden">
       <div 
-        style={{ fontSize }}
-        className={`flex justify-center items-baseline font-mono tabular-nums font-bold text-gray-100 tracking-wider leading-none w-full transform animate-clock-enter transition-clock-size ${sizeClass} whitespace-nowrap`}
+        style={{ fontSize, transitionDelay: sizeDelay }}
+        className="flex justify-center items-baseline font-mono tabular-nums font-bold text-gray-100 tracking-wider leading-none w-full transform animate-clock-enter transition-clock-size whitespace-nowrap"
       >
         <span>{timeOnly}</span>
-        <span className={`seconds-container ${secondsClass}`}>
+        <span 
+          style={{ transitionDelay: showSeconds ? showDelay : hideDelay }}
+          className={`seconds-container ${secondsClass}`}
+        >
           :{seconds}
         </span>
-        <span className={`ampm-suffix ${suffixClass}`}>
+        <span 
+          style={{ transitionDelay: is12Hour ? showDelay : hideDelay }}
+          className={`ampm-suffix ${suffixClass}`}
+        >
           {amPmSuffix}
         </span>
       </div>
