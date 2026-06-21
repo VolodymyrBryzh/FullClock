@@ -40,18 +40,21 @@ html, body, #root {
   max-width: 0;
   transform: translateX(-0.5em);
   transition: max-width var(--width-duration, 0.4s) cubic-bezier(0.25, 1, 0.5, 1) var(--width-delay, 0s),
+              margin-left var(--width-duration, 0.4s) cubic-bezier(0.25, 1, 0.5, 1) var(--width-delay, 0s),
               opacity var(--opacity-duration, 0.3s) ease-in-out var(--opacity-delay, 0s),
               transform var(--transform-duration, 0.4s) cubic-bezier(0.25, 1, 0.5, 1) var(--transform-delay, 0s);
 }
 
 .ampm-suffix.show {
   max-width: 3ch;
+  margin-left: 0.15em;
   opacity: 0.8;
   transform: translateX(0);
 }
 
 .ampm-suffix.hide {
   max-width: 0;
+  margin-left: 0;
   opacity: 0;
   transform: translateX(-0.5em);
 }

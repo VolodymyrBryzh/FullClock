@@ -50,20 +50,32 @@ export const Clock: React.FC<ClockProps> = memo(({ time, is12Hour, showSeconds }
     '--width-delay': showDelay,
     '--opacity-delay': showDelay,
     '--transform-delay': showDelay,
+    '--width-duration': '0.3s',
+    '--opacity-duration': '0.3s',
+    '--transform-duration': '0.3s',
   } : {
     '--width-delay': hideDelay,
     '--opacity-delay': hideDelay,
     '--transform-delay': hideDelay,
+    '--width-duration': '0.3s',
+    '--opacity-duration': '0.3s',
+    '--transform-duration': '0.3s',
   }) as React.CSSProperties;
 
   const secondsStyles = (showSeconds ? {
     '--width-delay': showDelay,
     '--opacity-delay': showDelay,
     '--transform-delay': showDelay,
+    '--width-duration': '0.3s',
+    '--opacity-duration': '0.3s',
+    '--transform-duration': '0.3s',
   } : {
     '--width-delay': hideDelay,
     '--opacity-delay': hideDelay,
     '--transform-delay': hideDelay,
+    '--width-duration': '0.3s',
+    '--opacity-duration': '0.3s',
+    '--transform-duration': '0.3s',
   }) as React.CSSProperties;
 
   return (
